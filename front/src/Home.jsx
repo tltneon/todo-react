@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import './App.css'
 import Create from './Create'
+import configData from "../config.json";
 
 function Home() {
 	const [todos, setTodos] = useState([]);
 	const [loading, setLoading] = useState(true);
   useEffect(() => {
-    axios.get('http://localhost:3000/get')
+    axios.get(`${configData.BACK_END_URL}get`)
     .then(result => setTodos(result.data))
     .catch(err => console.log(err))
     setLoading(false)
@@ -18,12 +19,12 @@ function Home() {
     handleEdit(todo);
   }
   const handleEdit = (todo) => {
-    axios.put(`http://localhost:3000/update/${todo._id}`, {todo: todo})
+    axios.put(`${configData.BACK_END_URL}update/${todo._id}`, {todo: todo})
     .then(result => console.log(result))
     .catch(err => console.log(err))
   }
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:3000/delete/${id}`)
+    axios.delete(`${configData.BACK_END_URL}delete/${id}`)
     .then(result => console.log(result))
     .catch(err => console.log(err))
   }
