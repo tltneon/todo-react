@@ -10,8 +10,10 @@ function Create() {
     axios.post(`${configData.BACK_END_URL}add`, {task: task})
     .then(result => console.log(result))
     .catch(err => console.log(err))
-    if (inputRef)
+    if (inputRef) {
       inputRef.current.value = "";
+      setTask("");
+		}
   }
   return (
     <div>
